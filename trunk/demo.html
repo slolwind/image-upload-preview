@@ -39,14 +39,18 @@
 
 <form>
   <input type="file" id="upload" style="width:400px; padding:3px;"/>
-
   <div id="file-info"></div>
 </form>
 
 
 <script type="text/javascript">
   (function() {
-    var demo = new ImageUploadPreview(document.getElementById('upload'),
+    var demo = new ImageUploadPreview(
+        
+        // Upload Input Element
+        document.getElementById('upload'),
+
+        // onPreviewSuccess handler.
         function(imgInfo) {
           var info = [];
           for (var i in imgInfo) {
@@ -60,13 +64,13 @@
           this.getImageElement().className = 'preview-image';
           document.getElementById('file-info').innerHTML = info.join('');
         },
+
+        // onPreviewFail handler.
         function() {
           this.getImageElement().className = '';
-        }) ;
+        });
 
-
-    var input = demo.getInputElement();
-    demo.setMaxImageSize(input.offsetWidth, 300);
+    demo.setMaxImageSize(demo.getInputElement().offsetWidth, 300);
 
 
     // If the value already exists, try display image.
