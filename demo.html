@@ -11,7 +11,7 @@
       margin: 20px;
       font: 80% / normal 'arial', 'sans-serif';
     }
-    
+
     #upload {
       border: solid 3px #ccc;
     }
@@ -19,6 +19,9 @@
     .preview-image {
       display: block;
       margin: 10px 0;
+      border: solid 3px #aaa;
+      padding: 1px;
+      background: #fff;
     }
   </style>
 </head>
@@ -30,25 +33,41 @@
 
 <p>
   <a href="http://code.google.com/p/image-upload-preview/">Google code project
-  home
+    home
   </a>
 </p>
 
 <form>
   <input type="file" id="upload" style="width:400px; padding:3px;"/>
+
+  <div id="file-info"></div>
 </form>
 
 
 <script type="text/javascript">
   (function() {
-    var demo = new ImageUploadPreview(document.getElementById('upload')) ;
+    var demo = new ImageUploadPreview(document.getElementById('upload'),
+        function(imgInfo) {
+          var info = [];
+          for (var i in imgInfo) {
+            info.push('<li>', i, ' = ', imgInfo[i], '</li>');
+          }
+
+          if (info.length) {
+            info.unshift('<ul>');
+            info.push('</ul>');
+          }
+          this.getImageElement().className = 'preview-image';
+          document.getElementById('file-info').innerHTML = info.join('');
+        },
+        function() {
+          this.getImageElement().className = '';
+        }) ;
+
+
     var input = demo.getInputElement();
-    var img = demo.getImageElement();
-
-    img.className = 'preview-image';
-
     demo.setMaxImageSize(input.offsetWidth, 300);
-    input.parentNode.insertBefore(img, input);
+
 
     // If the value already exists, try display image.
     demo.preview();
