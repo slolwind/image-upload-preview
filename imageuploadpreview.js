@@ -121,8 +121,8 @@ ImageUploadPreview.prototype.preview = function() {
   };
 
   var loadMethods = [
-    this.maybeShowImageByLocalPath_,
-    this.maybeShowImageWithDataUri_
+    this.maybeShowImageWithDataUri_,
+    this.maybeShowImageByLocalPath_
   ];
 
   var tryLoad = function() {
@@ -358,7 +358,7 @@ function(opt_onload, opt_onerror) {
 
   img.onload = checkComplete;
   img.onerror = checkComplete;
-  timer = window.setInterval(checkComplete, 100);
+  timer = window.setInterval(checkComplete, 50);
   img.src = el.value;
 };
 
