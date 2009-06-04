@@ -1,1 +1,54 @@
-demo.html
+<!doctype html>
+<html>
+<head>
+  <title>Image Upload Preview Demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <!-- Make sure that we can test against real IE8 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+  <script src="imageuploadpreview.js"></script>
+  <style type="text/css">
+    body {
+      margin: 20px;
+      font: 80% / normal 'arial', 'sans-serif';
+    }
+
+    form {
+      width: 600px;
+    }
+
+    #upload {
+      border: solid 3px #ccc;
+    }
+
+    .preview-image {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Image Upload Preview Demo</h1>
+<p>Now's it's only compatible with IE6, IE7, IE8, and Firefox 3</p>
+
+<form>
+  <input type="file" id="upload" style="width:400px;padding:3px;"/>
+</form>
+
+<script type="text/javascript">
+  (function() {
+    var demo = new ImageUploadPreview(document.getElementById('upload')) ;
+    var input = demo.getInputElement();
+    var img = demo.getImageElement();
+
+    img.className = 'preview-image';
+
+    demo.setMaxImageSize(input.offsetWidth, 300);
+    input.parentNode.insertBefore(img, input);
+
+    // If the value already exists, try display image.
+    demo.preview();
+  })();
+</script>
+</body>
+</html>
