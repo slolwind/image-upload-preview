@@ -1,4 +1,0 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-Feel free to leave your comment here :-)
